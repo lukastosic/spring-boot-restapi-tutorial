@@ -1,9 +1,13 @@
 package nl.infodation.springtutorial.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,9 +19,7 @@ import nl.infodation.springtutorial.models.HelloModel;
 
 @Controller
 @EnableAutoConfiguration
-public class HelloController {
-	
-	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
+public class HelloController {	
 	
 	@RequestMapping(path = "/hello", method = RequestMethod.GET)
 	@ResponseBody
@@ -27,11 +29,18 @@ public class HelloController {
 	
 	@RequestMapping(path = "/hello", method = RequestMethod.POST)
 	@ResponseBody
-	HelloModel postHello(@RequestParam(value="message") String message) {
+	HelloModel postHello(@RequestParam(name="message") String message) {
 		if(message.isEmpty()) {
 			throw new IllegalArgumentException("You must provide 'message' parameter in request.");
 		}
 		
 		return new HelloModel("You performed POST on /hello endpoint with message: '"+message+"'");
 	}
+	
+
+	@ExceptionHandler({IllegalArgumentException.class, NullPointerException.class})
+	void handleBadRequests(HttpServletResponse response) throws IOException {
+	    response.sendError(HttpStatus.BAD_REQUEST.value());
+	}
+
 }

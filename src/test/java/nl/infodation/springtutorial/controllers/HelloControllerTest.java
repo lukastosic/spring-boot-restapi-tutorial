@@ -51,6 +51,13 @@ public class HelloControllerTest {
 	}
 	
 	@Test
+	public void PostHelloWithEmptyMessageParameter() throws Exception {
+		mockMvc.perform(post("/hello?message="))
+		.andExpect(status().is(400));
+	}
+	
+	
+	@Test
 	public void PostHelloWithMessageParameter() throws Exception {
 		mockMvc.perform(post("/hello?message=testhello"))
 		.andExpect(status().isOk())
