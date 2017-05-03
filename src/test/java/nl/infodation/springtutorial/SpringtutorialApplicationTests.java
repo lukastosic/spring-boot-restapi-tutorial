@@ -1,4 +1,4 @@
-package nl.infodation;
+package nl.infodation.springtutorial;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
