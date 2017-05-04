@@ -1,10 +1,8 @@
 package nl.infodation.springtutorial.controllers;
 
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.Matchers.contains;
-import static org.mockito.Matchers.isNotNull;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -27,41 +25,35 @@ import nl.infodation.springtutorial.SpringtutorialApplication;
 public class HelloControllerTest {
 
 	private MockMvc mockMvc;
-	
+
 	@Autowired
-    private WebApplicationContext webApplicationContext;
-	
+	private WebApplicationContext webApplicationContext;
+
 	@Before
-    public void setup() throws Exception {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-    }
-	
+	public void setup() throws Exception {
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+	}
+
 	@Test
 	public void GetHelloTest() throws Exception {
-		mockMvc.perform(get("/hello"))
-		.andExpect(status().isOk())
-		.andExpect(jsonPath("$.message").isNotEmpty())
-		.andExpect(jsonPath("$.message", containsString("GET")));
+		mockMvc.perform(get("/hello")).andExpect(status().isOk()).andExpect(jsonPath("$.message").isNotEmpty())
+				.andExpect(jsonPath("$.message", containsString("GET")));
 	}
-	
+
 	@Test
 	public void PostHelloWithoutMessageParameter() throws Exception {
-		mockMvc.perform(post("/hello"))
-		.andExpect(status().is(400));
+		mockMvc.perform(post("/hello")).andExpect(status().is(400));
 	}
-	
+
 	@Test
 	public void PostHelloWithEmptyMessageParameter() throws Exception {
-		mockMvc.perform(post("/hello?message="))
-		.andExpect(status().is(400));
+		mockMvc.perform(post("/hello?message=")).andExpect(status().is(400));
 	}
-	
-	
+
 	@Test
 	public void PostHelloWithMessageParameter() throws Exception {
-		mockMvc.perform(post("/hello?message=testhello"))
-		.andExpect(status().isOk())
-		.andExpect(jsonPath("$.message", containsString("testhello")));
+		mockMvc.perform(post("/hello?message=testhello")).andExpect(status().isOk())
+				.andExpect(jsonPath("$.message", containsString("testhello")));
 	}
-	
+
 }
