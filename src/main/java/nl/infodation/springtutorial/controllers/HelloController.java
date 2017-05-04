@@ -22,22 +22,22 @@ public class HelloController {
     @RequestMapping(path = "/hello", method = RequestMethod.GET)
     @ResponseBody
     HelloModel getHello() {
-	return new HelloModel("Hello from REST interface with GET method on /hello endpoint");
+        return new HelloModel("Hello from REST interface with GET method on /hello endpoint");
     }
 
     @RequestMapping(path = "/hello", method = RequestMethod.POST)
     @ResponseBody
     HelloModel postHello(@RequestParam(name = "message") String message) {
-	if (message.isEmpty()) {
-	    throw new IllegalArgumentException("You must provide 'message' parameter in request.");
-	}
+        if (message.isEmpty()) {
+            throw new IllegalArgumentException("You must provide 'message' parameter in request.");
+        }
 
-	return new HelloModel("You performed POST on /hello endpoint with message: '" + message + "'");
+        return new HelloModel("You performed POST on /hello endpoint with message: '" + message + "'");
     }
 
     @ExceptionHandler({ IllegalArgumentException.class, NullPointerException.class })
     void handleBadRequests(HttpServletResponse response) throws IOException {
-	response.sendError(HttpStatus.BAD_REQUEST.value());
+        response.sendError(HttpStatus.BAD_REQUEST.value());
     }
 
 }

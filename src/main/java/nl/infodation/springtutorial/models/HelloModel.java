@@ -5,10 +5,10 @@ public class HelloModel {
     private String message;
 
     public HelloModel(String message) {
-	this.message = message;
+        this.message = message;
     }
 
     public String getMessage() {
-	return this.message;
+        return this.message;
     }
 }
