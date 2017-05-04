@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -42,12 +43,12 @@ public class HelloControllerTest {
 
 	@Test
 	public void PostHelloWithoutMessageParameter() throws Exception {
-		mockMvc.perform(post("/hello")).andExpect(status().is(400));
+		mockMvc.perform(post("/hello")).andExpect(status().is(HttpStatus.BAD_REQUEST.value()));
 	}
 
 	@Test
 	public void PostHelloWithEmptyMessageParameter() throws Exception {
-		mockMvc.perform(post("/hello?message=")).andExpect(status().is(400));
+		mockMvc.perform(post("/hello?message=")).andExpect(status().is(HttpStatus.BAD_REQUEST.value()));
 	}
 
 	@Test
