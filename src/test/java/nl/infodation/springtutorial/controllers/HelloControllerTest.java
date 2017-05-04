@@ -25,36 +25,40 @@ import nl.infodation.springtutorial.SpringtutorialApplication;
 @WebAppConfiguration
 public class HelloControllerTest {
 
-	private MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-	@Autowired
-	private WebApplicationContext webApplicationContext;
+    @Autowired
+    private WebApplicationContext webApplicationContext;
 
-	@Before
-	public void setup() throws Exception {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    @Before
+    public void setup() throws Exception {
+	this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    }
+
+    @Test
+    public void getHelloTest() throws Exception {
+	mockMvc.perform(get("/hello")).andExpect(status().isOk()).andExpect(jsonPath("$.message").isNotEmpty())
+		.andExpect(jsonPath("$.message", containsString("GET")));
+    }
+
+    @Test
+    public void postHelloWithoutMessageParameter() {
+	try {
+	    mockMvc.perform(post("/hello")).andExpect(status().is(HttpStatus.BAD_REQUEST.value()));
+	} catch (Exception e) {
+	    throw new RuntimeException("Test failed because " + e.getMessage(), e);
 	}
+    }
 
-	@Test
-	public void GetHelloTest() throws Exception {
-		mockMvc.perform(get("/hello")).andExpect(status().isOk()).andExpect(jsonPath("$.message").isNotEmpty())
-				.andExpect(jsonPath("$.message", containsString("GET")));
-	}
+    @Test
+    public void postHelloWithEmptyMessageParameter() throws Exception {
+	mockMvc.perform(post("/hello?message=")).andExpect(status().is(HttpStatus.BAD_REQUEST.value()));
+    }
 
-	@Test
-	public void PostHelloWithoutMessageParameter() throws Exception {
-		mockMvc.perform(post("/hello")).andExpect(status().is(HttpStatus.BAD_REQUEST.value()));
-	}
-
-	@Test
-	public void PostHelloWithEmptyMessageParameter() throws Exception {
-		mockMvc.perform(post("/hello?message=")).andExpect(status().is(HttpStatus.BAD_REQUEST.value()));
-	}
-
-	@Test
-	public void PostHelloWithMessageParameter() throws Exception {
-		mockMvc.perform(post("/hello?message=testhello")).andExpect(status().isOk())
-				.andExpect(jsonPath("$.message", containsString("testhello")));
-	}
+    @Test
+    public void postHelloWithMessageParameter() throws Exception {
+	mockMvc.perform(post("/hello?message=testhello")).andExpect(status().isOk())
+		.andExpect(jsonPath("$.message", containsString("testhello")));
+    }
 
 }
