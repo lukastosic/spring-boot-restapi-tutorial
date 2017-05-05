@@ -43,6 +43,13 @@
 			<version>0.7.9</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.codehaus.sonar.runner/sonar-runner-dist -->
+		<dependency>
+			<groupId>org.codehaus.sonar.runner</groupId>
+			<artifactId>sonar-runner-dist</artifactId>
+			<version>2.4</version>
+		</dependency>
+
 	</dependencies>
 
 	<reporting>
