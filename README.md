@@ -41,6 +41,6 @@ To achieve this we will learn how to use these techniques:
 
 To see all descriptions - follow Wiki pages (link on the left sidebar).
 
-[All wiki pages](https://bitbucket.org/lukastosic/spring-boot-restapi-tutorial/wiki/browse)
+[All wiki pages](https://bitbucket.org/lukastosic/spring-boot-restapi-tutorial/wiki/browse/)
 
 To see how code resembles those description - you can see tags on the master branch (`part1`, `part2` etc.).
