@@ -41,4 +41,11 @@ To achieve this we will learn how to use these techniques:
 
 To see all descriptions - follow Wiki pages (link on the left sidebar).
 
-To see how code resebles those description - you can see tags on the master branch (`part1`, `part2` etc.).
+* [All wiki pages](wiki/browse/)
+* [Part 1 - Spring Boot Application](wiki/Part 1 - Spring Boot Application.md)
+* [Part 2 - REST API](wiki/Part 2 - REST API.md)
+* [Part 3 - Unit tests](wiki/Part 3 - Unit tests.md)
+* [Part 4 - Code Coverage and Code Quality](wiki/Part 4 - Code Coverage and Code Quality.md)
+
+
+To see how code resembles those description - you can see tags on the master branch (`part1`, `part2` etc.).
