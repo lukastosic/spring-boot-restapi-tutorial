@@ -4,7 +4,8 @@ pipelines:
       - step:
           image: maven:3.3.9
           script:
-            - mvn clean package -Dspring.profiles.active=ci
+            - sleep 10 # Wait for Database to start
+            - mvn clean package -Dspring.profiles.active=bitbucketpipelines
           services:
             - database
 definitions:
