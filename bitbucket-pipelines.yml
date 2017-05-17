@@ -1,14 +1,15 @@
-image: maven:3.3.9
-
 pipelines:
-  default:
-    - step:
-        script: 
-          - mvn clean package -Dspring.profiles.active=ci
+  branches:
+    master:
+      - step:
+          image: maven:3.3.9
+          script:
+            - mvn clean package -Dspring.profiles.active=ci
+          services:
+            - database
 definitions:
   services:
     database:
       image: mariadb
       environment:
-        MYSQL_ROOT_PASSWORD: root
-          
+        MYSQL_ROOT_PASSWORD: root       
