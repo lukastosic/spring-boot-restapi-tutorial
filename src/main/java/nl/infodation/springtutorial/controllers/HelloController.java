@@ -16,16 +16,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import nl.infodation.springtutorial.models.HelloModel;
 
 @Controller
+@RequestMapping(path = "/hello")
 @EnableAutoConfiguration
 public class HelloController {
 
-    @RequestMapping(path = "/hello", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     HelloModel getHello() {
         return new HelloModel("Hello from REST interface with GET method on /hello endpoint");
     }
 
-    @RequestMapping(path = "/hello", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     HelloModel postHello(@RequestParam(name = "message") String message) {
         if (message.isEmpty()) {
