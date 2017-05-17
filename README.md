@@ -1,3 +1,5 @@
+[![BCH compliance](https://bettercodehub.com/edge/badge/lukastosic/spring-boot-restapi-tutorial?branch=master)](https://bettercodehub.com/)
+
 # Spring Boot (REST API) Tutorial
 
 ## Intro
