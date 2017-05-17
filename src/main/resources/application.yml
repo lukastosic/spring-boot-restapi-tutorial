@@ -19,8 +19,8 @@ spring:
     password: ${DB_PASSWORD}
 ---
 spring:
-  profiles: ci-jenkins
+  profiles: ci
   datasource:
-    url: jdbc:mysql://springtest:3306/springtutorialmovies?createDatabaseIfNotExist=true
+    url: jdbc:mysql://database:3306/springtutorialmovies?createDatabaseIfNotExist=true
     username: root
     password: root
