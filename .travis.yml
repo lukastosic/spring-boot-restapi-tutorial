@@ -1,0 +1,6 @@
+language: java
+script: mvn clean test -Dspring.profiles.active=bitbucketpipelines -Dspring.datasource.password=
+services:
+  - mysql
+before_install:
+  - mysql -e 'CREATE DATABASE springtutorialmovies;'
